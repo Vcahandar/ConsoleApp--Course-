@@ -21,15 +21,17 @@ namespace ServiceLayer.Services
         public Teacher Create(Teacher teacher)
         {
             teacher.Id = _count;
-            Teacher existLibary=_repo.Get(m=>m.Name.ToLower()==teacher.Name.ToLower());
             _repo.Create(teacher);
             _count++;
             return teacher;
         }
 
-        public Teacher Delete(int id)
+        public void Delete(int? id)
         {
-            throw new NotImplementedException();
+            if(id is null) throw new ArgumentNullException();
+            Teacher dbTeacher = _repo.Get(m => m.Id == id);
+            if (dbTeacher  == null) throw new NullReferenceException("Data notfound");
+            _repo.Delete(dbTeacher);
         }
 
         public List<Teacher> GetAll()

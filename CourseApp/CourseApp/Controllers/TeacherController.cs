@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CourseApp.Controllers
@@ -21,12 +22,17 @@ namespace CourseApp.Controllers
         public void Create()
         {
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher name:");
-            TeacherName: string teacherName=Console.ReadLine();
+        TeacherName: string teacherName = Console.ReadLine();
+
+            //string pettern = @"\|!#$%&/()=?><@{}.-;'_,";
+            
             if (teacherName == string.Empty)
             {
                 ConsoleColor.Red.WriteConsole("Please add dont empty Teacher name:");
                 goto TeacherName;
             }
+           
+           
 
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher surname:");
             TeacherSurname: string teacherSurname=Console.ReadLine();
@@ -80,12 +86,14 @@ namespace CourseApp.Controllers
             else
             {
                 ConsoleColor.Red.WriteConsole("You cannot register correctly, please register again.");
+
+                ConsoleColor.Cyan.WriteConsole("Please select one option: ");
+                ConsoleColor.Cyan.WriteConsole("Teacher Options: 1 - Create, 2 - Get All, 3 - Delete");
                 goto TeacherName;
             }
 
 
         }
-
 
         public void GetAll()
         {
@@ -102,6 +110,39 @@ namespace CourseApp.Controllers
                     ConsoleColor.Green.WriteConsole($"Id: {item.Id}, Name: {item.Name}, Surname: {item.Surname}, Age:{item.Age}, Address:{item.Address}");
 
                 }
+            }
+        }
+
+        public void Delete()
+        {
+            ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id for delete:");
+            TeacherId: string teacherId=Console.ReadLine();
+
+            int id;
+            
+            bool isCorrectId=int.TryParse(teacherId, out id);
+
+            if (isCorrectId)
+            {
+                try
+                {
+                    _teacherService.Delete(id);
+                }
+                catch (Exception ex)
+                {
+
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add teacher Id again");
+                    goto TeacherId;
+                }
+
+
+
+            }
+            else
+            {
+                ConsoleColor.Red.WriteConsole("Please add correct format teacher Id");
+                goto TeacherId;
+
             }
         }
     }
