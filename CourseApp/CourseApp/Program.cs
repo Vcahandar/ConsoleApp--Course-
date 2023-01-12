@@ -1,6 +1,9 @@
 ﻿
 
+using CourseApp.Controllers;
 using ServiceLayer.Helpers;
+
+TeacherController teacher=new TeacherController();
 
 while (true)
 {
@@ -18,9 +21,10 @@ while (true)
        switch(selectedOption)
         {
             case 1:
-                Console.WriteLine("Create");
+                teacher.Create();
                 break;
-            case 2: Console.WriteLine("Get All");
+            case 2: 
+                teacher.GetAll();
                 break;
             case 3: Console.WriteLine("Delete");
                 break;

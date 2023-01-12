@@ -13,7 +13,7 @@ namespace ServiceLayer.Services
     {
         private readonly TeacherRepository _repo;
         private int _count = 1;
-
+         
         public TeacherService()
         {
             _repo= new TeacherRepository();
@@ -21,6 +21,7 @@ namespace ServiceLayer.Services
         public Teacher Create(Teacher teacher)
         {
             teacher.Id = _count;
+            Teacher existLibary=_repo.Get(m=>m.Name.ToLower()==teacher.Name.ToLower());
             _repo.Create(teacher);
             _count++;
             return teacher;
@@ -33,7 +34,7 @@ namespace ServiceLayer.Services
 
         public List<Teacher> GetAll()
         {
-            throw new NotImplementedException();
+            return _repo.GetAll();
         }
 
         public Teacher GetById(int id)

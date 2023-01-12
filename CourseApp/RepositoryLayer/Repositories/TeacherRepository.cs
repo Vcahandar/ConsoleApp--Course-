@@ -27,12 +27,12 @@ namespace RepositoryLayer.Repositories
 
         public Teacher Get(Predicate<Teacher> predicate)
         {
-            throw new NotImplementedException();
+            return AppDbContext<Teacher>.datas.Find(predicate);
         }
 
-        public List<Teacher> GetAll(Predicate<Teacher> predicate)
+        public List<Teacher> GetAll(Predicate<Teacher> predicate=null)
         {
-            throw new NotImplementedException();
+            return predicate==null ? AppDbContext<Teacher>.datas:AppDbContext<Teacher>.datas.FindAll(predicate);
         }
 
         public void Update(Teacher entity)
