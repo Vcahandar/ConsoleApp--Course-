@@ -1,0 +1,12 @@
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\bin\Debug\net6.0\DomainLayer.deps.json
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\bin\Debug\net6.0\DomainLayer.dll
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\bin\Debug\net6.0\DomainLayer.pdb
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\obj\Debug\net6.0\DomainLayer.csproj.AssemblyReference.cache
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\obj\Debug\net6.0\DomainLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\obj\Debug\net6.0\DomainLayer.AssemblyInfoInputs.cache
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\obj\Debug\net6.0\DomainLayer.AssemblyInfo.cs
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\obj\Debug\net6.0\DomainLayer.csproj.CoreCompileInputs.cache
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\obj\Debug\net6.0\DomainLayer.dll
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\obj\Debug\net6.0\refint\DomainLayer.dll
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\obj\Debug\net6.0\DomainLayer.pdb
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\DomainLayer\obj\Debug\net6.0\ref\DomainLayer.dll

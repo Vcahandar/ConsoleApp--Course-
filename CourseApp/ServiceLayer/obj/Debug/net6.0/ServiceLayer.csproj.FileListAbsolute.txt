@@ -1,0 +1,17 @@
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\bin\Debug\net6.0\ServiceLayer.deps.json
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\bin\Debug\net6.0\ServiceLayer.dll
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\bin\Debug\net6.0\ServiceLayer.pdb
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\bin\Debug\net6.0\DomainLayer.dll
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\bin\Debug\net6.0\RepositoryLayer.dll
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\bin\Debug\net6.0\RepositoryLayer.pdb
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\bin\Debug\net6.0\DomainLayer.pdb
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\obj\Debug\net6.0\ServiceLayer.csproj.AssemblyReference.cache
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\obj\Debug\net6.0\ServiceLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\obj\Debug\net6.0\ServiceLayer.AssemblyInfoInputs.cache
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\obj\Debug\net6.0\ServiceLayer.AssemblyInfo.cs
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\obj\Debug\net6.0\ServiceLayer.csproj.CoreCompileInputs.cache
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\obj\Debug\net6.0\ServiceLayer.csproj.CopyComplete
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\obj\Debug\net6.0\ServiceLayer.dll
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\obj\Debug\net6.0\refint\ServiceLayer.dll
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\obj\Debug\net6.0\ServiceLayer.pdb
+C:\Users\user\OneDrive\Masaüstü\Console App --LAHIYE\CourseApp\ServiceLayer\obj\Debug\net6.0\ref\ServiceLayer.dll
