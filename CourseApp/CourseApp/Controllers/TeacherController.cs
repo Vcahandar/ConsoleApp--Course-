@@ -21,29 +21,44 @@ namespace CourseApp.Controllers
         }
         public void Create()
         {
+            string pettern = "^(?!\\s+$)[a-zA-Z]+$";
+
+
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher name:");
         TeacherName: string teacherName = Console.ReadLine();
 
-            //string pettern = @"\|!#$%&/()=?><@{}.-;'_,";
-            
-            if (teacherName == string.Empty)
-            {
-                ConsoleColor.Red.WriteConsole("Please add dont empty Teacher name:");
-                goto TeacherName;
-            }
-           
-           
+          if (teacherName == string.Empty)
+          {
+             ConsoleColor.Red.WriteConsole("Please add dont empty Teacher name:");
+             goto TeacherName;
+          }
+          else if (!Regex.IsMatch(teacherName, pettern))
+          {
+             ConsoleColor.Red.WriteConsole("herf daxil edin");
+             goto TeacherName;
+
+          }
+
 
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher surname:");
-            TeacherSurname: string teacherSurname=Console.ReadLine();
-            if (teacherSurname==string.Empty)
+        TeacherSurname: string teacherSurname = Console.ReadLine();
+
+            if (teacherSurname == string.Empty)
             {
                 ConsoleColor.Red.WriteConsole("Please add dont empty Teacher surname:");
                 goto TeacherSurname;
             }
+            else if (!Regex.IsMatch(teacherSurname, pettern))
+            {
+                ConsoleColor.Red.WriteConsole("herf daxil edin");
+                goto TeacherSurname;
+
+            }
+
 
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher address:");
             TeacherAddress: string teacherAddress = Console.ReadLine();
+
             if (teacherAddress==string.Empty)
             {
                 ConsoleColor.Red.WriteConsole("Please add dont empty Teacher address:");
@@ -51,9 +66,14 @@ namespace CourseApp.Controllers
             }
 
 
-
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher age:");
-            string teacherAgeStr=Console.ReadLine();
+            TeacherAge: string teacherAgeStr=Console.ReadLine();
+
+            if (teacherAgeStr==string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Please add dont empty Teacher age:");
+                goto TeacherAge;
+            }
 
 
             int teachAge;
@@ -86,9 +106,6 @@ namespace CourseApp.Controllers
             else
             {
                 ConsoleColor.Red.WriteConsole("You cannot register correctly, please register again.");
-
-                ConsoleColor.Cyan.WriteConsole("Please select one option: ");
-                ConsoleColor.Cyan.WriteConsole("Teacher Options: 1 - Create, 2 - Get All, 3 - Delete");
                 goto TeacherName;
             }
 
