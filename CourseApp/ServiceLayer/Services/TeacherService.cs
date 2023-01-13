@@ -68,10 +68,8 @@ namespace ServiceLayer.Services
             if (result != null)
             {
                 teacher.Id = result.Id;
-                teacher.Name= result.Name;
-                teacher.Surname=result.Surname;
-                teacher.Address= result.Address;
-                teacher.Age= result.Age;
+                result.Name=teacher.Name;
+               
                 _repo.Update(teacher);
             }
             return teacher;

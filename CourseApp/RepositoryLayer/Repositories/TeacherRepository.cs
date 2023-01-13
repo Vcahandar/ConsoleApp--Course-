@@ -37,9 +37,19 @@ namespace RepositoryLayer.Repositories
             return predicate==null ? AppDbContext<Teacher>.datas:AppDbContext<Teacher>.datas.FindAll(predicate);
         }
 
-        public void Update(Teacher entity)
+        public bool Update(Teacher entity)
         {
             if (entity == null) throw new ArgumentNullException();
+            var res = Get(t => t.Id == entity.Id);
+            if (res != null)
+            {
+
+                res.Name = entity.Name;
+                res.Surname = entity.Surname;
+                res.Address = entity.Address;
+                res.Age = entity.Age;
+            }
+            return true;
         }
     }
 }

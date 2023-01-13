@@ -318,15 +318,15 @@ namespace CourseApp.Controllers
 
                     Teacher newTeacher = new();
                    newTeacher = _teacherService.Update(id, teacher);
-                    ConsoleColor.Red.WriteConsole("Succesfully updated");
+                    ConsoleColor.Green.WriteConsole("Succesfully updated");
 
                    
                    
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
-                    throw;
+                    ConsoleColor.Cyan.WriteConsole(ex.Message);
                 }
 
             }

@@ -11,7 +11,7 @@ namespace RepositoryLayer.Repositories.Interfaces
     {
         void Create(T entity);
         void Delete(T entity);
-        void Update(T entity);
+        bool Update(T entity);
         T Get(Predicate<T> predicate);
         List<T> GetAll(Predicate<T> predicate);
     }
