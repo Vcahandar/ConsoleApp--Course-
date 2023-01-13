@@ -226,7 +226,7 @@ namespace CourseApp.Controllers
                 catch (Exception ex)
                 {
 
-                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Teacher name again:");
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Teacher Id again:");
                 }
             }
 
