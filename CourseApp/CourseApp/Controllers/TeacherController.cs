@@ -234,14 +234,29 @@ namespace CourseApp.Controllers
 
         }
 
+
         public void Update()
         {
+           
+            string pettern = "^(?!\\s+$)[a-zA-Z]+$";
+
+
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id:");
             EnterId: string teacherId = Console.ReadLine();
             int id;
             bool isIdTrue = int.TryParse(teacherId, out id);
+            if (Regex.IsMatch(teacherId,pettern))
+            {
+                ConsoleColor.Red.WriteConsole(" Teacher Error Id:");
+                goto EnterId;
+            }
+            else if (teacherId==string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Please add dont empty Teacher Id:");
+                goto EnterId;
 
-            string pettern = "^(?!\\s+$)[a-zA-Z]+$";
+            }
+
 
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Name:");
         TeacherName: string newName = Console.ReadLine();

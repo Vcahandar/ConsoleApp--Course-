@@ -52,7 +52,7 @@ namespace ServiceLayer.Services
 
         public List<Teacher> Search(string searchText)
         {
-            List<Teacher> teachers = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()));
+            List<Teacher> teachers = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()) || m.Surname.ToLower().Contains(searchText));
             if (teachers.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
 
             return teachers;
@@ -68,9 +68,22 @@ namespace ServiceLayer.Services
             if (result != null)
             {
                 teacher.Id = result.Id;
-                result.Name=teacher.Name;
+                if (teacher.Name == string.Empty) 
+                    teacher.Name = result.Name;
+                    result.Name=teacher.Name;
+                if (teacher.Surname == string.Empty)
+                    teacher.Surname = result.Surname;
+                    result.Surname=teacher.Surname;
+                if (teacher.Address== string.Empty)
+                    teacher.Address = result.Address;
+                    result.Address=teacher.Address;
+   
+                if (teacher.Age == null) 
+                    teacher.Age = result.Age;
+                     result.Age= teacher.Age;
+
+                _repo.Update(result);
                
-                _repo.Update(teacher);
             }
             return teacher;
         }
