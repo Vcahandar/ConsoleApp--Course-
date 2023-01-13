@@ -30,13 +30,13 @@ while (true)
                 teacher.Delete();
                 break;
             case 4:
-                Console.WriteLine("Get teacher by id");
+                teacher.GetById();
                 break;
             case 5:
                 teacher.GetAll();
                 break;
             case 6:
-                Console.WriteLine("Search for teacher name and surname");
+                teacher.Search();
                 break;
             default:
                 ConsoleColor.Red.WriteConsole("Please add correct option");
@@ -56,5 +56,7 @@ while (true)
 static void GetOptions()
 {
     ConsoleColor.Cyan.WriteConsole("Please select one option: ");
-    ConsoleColor.Cyan.WriteConsole("Teacher Options: 1 - Create, 2 - Update Teacher, 3 - Delete, 4 - Get teacher by id, 5 - Get all teachers, 6 - Search for teacher name and surname,");
+    ConsoleColor.Cyan.WriteConsole("Teacher Options:\n1 - Create\n2 - Update Teacher\n3 - Delete\n4 - Get teacher by id\n5 - Get all teachers\n6 - Search for teacher name and surname,");
 }
+
+;

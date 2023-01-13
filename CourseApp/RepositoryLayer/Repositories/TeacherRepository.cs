@@ -30,6 +30,8 @@ namespace RepositoryLayer.Repositories
             return AppDbContext<Teacher>.datas.Find(predicate);
         }
 
+       
+
         public List<Teacher> GetAll(Predicate<Teacher> predicate=null)
         {
             return predicate==null ? AppDbContext<Teacher>.datas:AppDbContext<Teacher>.datas.FindAll(predicate);
@@ -37,7 +39,8 @@ namespace RepositoryLayer.Repositories
 
         public void Update(Teacher entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) throw new ArgumentNullException();
+            AppDbContext<Teacher>.datas.Add(entity);
         }
     }
 }
