@@ -13,7 +13,9 @@ namespace ServiceLayer.Services.Interfaces
         void Delete(int? id);
         Teacher GetById(int ?id);
         List<Teacher> Search(string searchText);
-        List<Teacher> GetAll(); 
+        List<Teacher> GetAll();
+
+        Teacher Update(int? id,Teacher teacher );
 
     }
 }

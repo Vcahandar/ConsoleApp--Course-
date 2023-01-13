@@ -24,7 +24,7 @@ while (true)
                 teacher.Create();
                 break;
             case 2:
-                Console.WriteLine("Update Teacher");
+                teacher.Update();
                 break;
             case 3: 
                 teacher.Delete();
@@ -59,4 +59,3 @@ static void GetOptions()
     ConsoleColor.Cyan.WriteConsole("Teacher Options:\n1 - Create\n2 - Update Teacher\n3 - Delete\n4 - Get teacher by id\n5 - Get all teachers\n6 - Search for teacher name and surname,");
 }
 
-;

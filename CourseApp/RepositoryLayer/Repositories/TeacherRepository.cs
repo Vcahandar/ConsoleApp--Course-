@@ -40,7 +40,6 @@ namespace RepositoryLayer.Repositories
         public void Update(Teacher entity)
         {
             if (entity == null) throw new ArgumentNullException();
-            AppDbContext<Teacher>.datas.Add(entity);
         }
     }
 }

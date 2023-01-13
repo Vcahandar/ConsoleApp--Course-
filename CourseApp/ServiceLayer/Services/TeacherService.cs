@@ -49,13 +49,32 @@ namespace ServiceLayer.Services
             return dbTeacher;
         }
 
+
         public List<Teacher> Search(string searchText)
         {
-            List<Teacher> teachers = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower() && m.Surname.ToLower().Contains(searchText.ToLower)));
+            List<Teacher> teachers = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()));
             if (teachers.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
 
             return teachers;
            
+        }
+
+        public Teacher Update(int? id, Teacher teacher)
+        {
+            if(id==null) throw new ArgumentNullException();
+            if(teacher ==null) throw new ArgumentNullException();
+            var result = GetById(id);
+
+            if (result != null)
+            {
+                teacher.Id = result.Id;
+                teacher.Name= result.Name;
+                teacher.Surname=result.Surname;
+                teacher.Address= result.Address;
+                teacher.Age= result.Age;
+                _repo.Update(teacher);
+            }
+            return teacher;
         }
     }
 }
