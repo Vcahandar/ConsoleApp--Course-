@@ -2,8 +2,10 @@
 
 using CourseApp.Controllers;
 using ServiceLayer.Helpers;
+using ServiceLayer.Helpers.Enum;
 
 TeacherController teacher=new TeacherController();
+GroupsController groups=new GroupsController();
 
 while (true)
 {
@@ -20,23 +22,26 @@ while (true)
     {
        switch(selectedOption)
         {
-            case 1:
+            case (int)Options.CreateTeacher:
                 teacher.Create();
                 break;
-            case 2:
+            case (int)Options.UptadeTeacher:
                 teacher.Update();
                 break;
-            case 3: 
+            case (int)Options.DeleteTeacher:
                 teacher.Delete();
                 break;
-            case 4:
+            case (int)Options.GetByTeacherById:
                 teacher.GetById();
                 break;
-            case 5:
+            case (int)Options.GettAllTeachers:
                 teacher.GetAll();
                 break;
-            case 6:
+            case (int)Options.SearchForTeacherNameAndSurname:
                 teacher.Search();
+                break;
+            case (int)Options.CreateGroup:
+                groups.Create();
                 break;
             default:
                 ConsoleColor.Red.WriteConsole("Please add correct option");
@@ -56,6 +61,6 @@ while (true)
 static void GetOptions()
 {
     ConsoleColor.Cyan.WriteConsole("Please select one option: ");
-    ConsoleColor.Cyan.WriteConsole("Teacher Options:\n1 - Create\n2 - Update Teacher\n3 - Delete\n4 - Get teacher by id\n5 - Get all teachers\n6 - Search for teacher name and surname,");
+    ConsoleColor.Cyan.WriteConsole("Teacher Options:\n1 - Create\n2 - Update Teacher\n3 - Delete\n4 - Get teacher by id\n5 - Get all teachers\n6 - Search for teacher name and surname\n7 - Create Groups");
 }
 

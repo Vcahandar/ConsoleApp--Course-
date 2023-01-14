@@ -9,14 +9,14 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IGroupServices
     {
-        Group Create(Group group);
+        Group Create(Group group, int teacherId);
         Group Update(int? id,Group group);
         Group GetGroupById(int? id);
         void Delete(int? id);
         Group GetGroupByCapacity(int? capacity);
-        List<Group> GetGroupByTeacherId(Teacher teacherId);
-        List<Group> GetGroupByTeacherName(Teacher teacherName);
+        List<Group> GetGroupByTeacherId(int? teacherId);
+        List<Group> GetGroupByTeacherName(string teacherName);
         List<Group> GetGroupBySearchName(string searchText);
-        List<Group> GetAllGroup();
+        int GetGroupCount();
     }
 }

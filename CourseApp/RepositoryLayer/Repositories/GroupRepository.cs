@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using RepositoryLayer.Data;
 using RepositoryLayer.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,9 @@ namespace RepositoryLayer.Repositories
     {
         public void Create(Group entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) throw new ArgumentNullException();
+
+            AppDbContext<Group>.datas.Add(entity);
         }
 
         public void Delete(Group entity)
