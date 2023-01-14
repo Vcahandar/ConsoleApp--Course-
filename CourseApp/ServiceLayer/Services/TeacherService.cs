@@ -36,6 +36,7 @@ namespace ServiceLayer.Services
             _repo.Delete(dbTeacher);
         }
 
+
         public List<Teacher> GetAll()
         {
             return _repo.GetAll();

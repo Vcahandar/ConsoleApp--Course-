@@ -22,9 +22,12 @@ namespace ServiceLayer.Services
         }
         public Group Create(Group group,int teacherId)
         {
-            Teacher teacher=_teacher.Get(m=>m.Id==teacherId);
-            if (teacher == null) return null;
+            Teacher teachers=_teacher.Get(m=>m.Id==teacherId);
             group.Id = _count;
+            group.Teacher= teachers;
+            if (teachers == null) throw new Exception("Data not found");
+            var teacher = _repo.Get(m=>m.Name.ToLower() == group.Name.ToLower());
+            if (teacher != null) throw new Exception("Data already exist");
             _repo.Create(group);
             _count++;
             return group;
@@ -32,14 +35,12 @@ namespace ServiceLayer.Services
 
         public void Delete(int? id)
         {
-            throw new NotImplementedException();
-        }
+            if (id == null) throw new ArgumentNullException();
+            Group dbGroup=_repo.Get(m=>m.Id==id);
 
-        public List<Group> GetAllGroup()
-        {
-            throw new NotImplementedException();
+            if (dbGroup == null) throw new NullReferenceException("Data notfound");
+            _repo.Delete(dbGroup);
         }
-
       
         public Group GetGroupByCapacity(int? capacity)
         {

@@ -20,17 +20,18 @@ namespace RepositoryLayer.Repositories
 
         public void Delete(Group entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) throw new ArgumentNullException();
+            AppDbContext<Group>.datas.Remove(entity);
         }
 
         public Group Get(Predicate<Group> predicate)
         {
-            throw new NotImplementedException();
+            return AppDbContext<Group>.datas.Find(predicate);
         }
 
         public List<Group> GetAll(Predicate<Group> predicate)
         {
-            throw new NotImplementedException();
+            return predicate == null ? AppDbContext<Group>.datas : AppDbContext<Group>.datas.FindAll(predicate);
         }
 
         public bool Update(Group entity)
