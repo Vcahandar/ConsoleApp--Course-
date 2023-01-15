@@ -1,5 +1,7 @@
 ﻿using DomainLayer.Models;
 using RepositoryLayer.Repositories;
+using ServiceLayer.Exceptions;
+using ServiceLayer.Helpers.Constants;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -49,12 +51,18 @@ namespace ServiceLayer.Services
 
         public Group GetGroupById(int? id)
         {
-            throw new NotImplementedException();
+            if (id is null) throw new ArgumentNullException();
+            Group dbGroup = _repo.Get(m => m.Id == id);
+            if (dbGroup == null) throw new NullReferenceException("Data notfound");
+            return dbGroup;
         }
 
         public List<Group> GetGroupBySearchName(string searchText)
         {
-            throw new NotImplementedException();
+            List<Group> groups = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()));
+            if (groups.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
+
+            return groups;
         }
 
 
@@ -65,7 +73,10 @@ namespace ServiceLayer.Services
 
         public List<Group> GetGroupByTeacherName(string teacherName)
         {
-            throw new NotImplementedException();
+            List<Group> groups = _repo.GetAll(m => m.Teacher.Name.ToLower().Contains(teacherName.ToLower()));
+            if (groups.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
+
+            return groups;
         }
 
         public int GetGroupCount()

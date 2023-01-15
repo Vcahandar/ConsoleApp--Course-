@@ -43,6 +43,19 @@ while (true)
             case (int)Options.CreateGroup:
                 groups.Create();
                 break;
+            case (int)Options.DeleteGroup:
+                groups.Delete();
+                break;
+            case (int)Options.GetGroupById:
+                groups.GetByIdGroup();
+                break;
+            case (int)Options.SearchMethodForGroupByName:
+                groups.GetGroupBySearchName();
+                break;
+            case (int)Options.GetAllGroupsByTeacherName:
+                groups.GetGroupByTeacherName();
+                break;
+
             default:
                 ConsoleColor.Red.WriteConsole("Please add correct option");
                 goto Option;
@@ -61,6 +74,7 @@ while (true)
 static void GetOptions()
 {
     ConsoleColor.Cyan.WriteConsole("Please select one option: ");
-    ConsoleColor.Cyan.WriteConsole("Teacher Options:\n1 - Create\n2 - Update Teacher\n3 - Delete\n4 - Get teacher by id\n5 - Get all teachers\n6 - Search for teacher name and surname\n7 - Create Groups");
-}
+    ConsoleColor.Cyan.WriteConsole("Teacher Options:\n1 - Create\n2 - Update Teacher\n3 - Delete\n4 - Get teacher by id\n5 - Get all teachers\n6 - Search for teacher name and surname\n7 - Create Groups \n8 -Delete \n9 - Group By Id" +
+        "\n10 - Group Search Name Group\n11 - Groups Search Teacher Name");
+}     
 

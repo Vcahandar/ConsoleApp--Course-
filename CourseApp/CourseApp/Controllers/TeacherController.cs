@@ -153,8 +153,6 @@ namespace CourseApp.Controllers
                     goto TeacherId;
                 }
 
-
-
             }
             else
             {
@@ -188,7 +186,7 @@ namespace CourseApp.Controllers
             catch (Exception ex)
             {
 
-                ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add teacher Id again");
+                ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add teacher name");
                 goto SearchText;
             }
 

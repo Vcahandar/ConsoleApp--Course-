@@ -15,13 +15,13 @@ namespace ServiceLayer.Helpers.Enum
         GettAllTeachers,
         SearchForTeacherNameAndSurname,
         CreateGroup,
-        UpdateGroup,
-        GetGroupById,
         DeleteGroup,
+        GetGroupById,
+        SearchMethodForGroupByName,
+        GetAllGroupsByTeacherName,
+        UpdateGroup,
         GetGroupsByCapacity,
         GetGroupByTeacherId,
-        GetAllGroupsByTeacherName,
-        SearchMethodForGroupByName,
         GetAllGroupsCount
     }
 }
