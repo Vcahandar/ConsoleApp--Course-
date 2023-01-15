@@ -20,7 +20,6 @@ namespace CourseApp.Controllers
         {
             _groupServices = new GroupServices();
 
-
         }
 
         public void Create()
@@ -91,8 +90,8 @@ namespace CourseApp.Controllers
                 catch (Exception ex)
                 {
 
-                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Teacher Id:");
-                    goto GroupCapacity;
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Group Name:");
+                    goto GroupName;
 
                 }
             }

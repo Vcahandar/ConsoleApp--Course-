@@ -28,8 +28,10 @@ namespace ServiceLayer.Services
             group.Id = _count;
             group.Teacher= teachers;
             if (teachers == null) throw new Exception("Data not found");
+
             var teacher = _repo.Get(m=>m.Name.ToLower() == group.Name.ToLower());
             if (teacher != null) throw new Exception("Data already exist");
+
             _repo.Create(group);
             _count++;
             return group;

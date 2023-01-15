@@ -105,8 +105,8 @@ namespace CourseApp.Controllers
             }
             else
             {
-                ConsoleColor.Red.WriteConsole("You cannot register correctly, please register again.");
-                goto TeacherName;
+                ConsoleColor.Red.WriteConsole("You cannot register correctly, please teacher age again add.");
+                goto TeacherAge;
             }
 
 
@@ -194,6 +194,9 @@ namespace CourseApp.Controllers
 
         public void GetById()
         {
+
+            string pettern = "^(?!\\s+$)[a-zA-Z]+$";
+
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id:");
         ById: string GetById = Console.ReadLine();
 
@@ -201,6 +204,12 @@ namespace CourseApp.Controllers
             {
                 ConsoleColor.Red.WriteConsole("Please add dont empty Teacher age:");
                 goto ById;
+            }
+            else if (Regex.IsMatch(GetById, pettern))
+            {
+                ConsoleColor.Red.WriteConsole("Please add Id number ");
+                goto ById;
+
             }
 
             int byIdNum;
@@ -225,6 +234,7 @@ namespace CourseApp.Controllers
                 {
 
                     ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Teacher Id again:");
+                    goto ById;
                 }
             }
 
@@ -250,7 +260,7 @@ namespace CourseApp.Controllers
             }
             else if (teacherId==string.Empty)
             {
-                ConsoleColor.Red.WriteConsole("Please add dont empty Teacher Id:");
+                ConsoleColor.Red.WriteConsole("Please add don't empty Teacher Id:");
                 goto EnterId;
 
             }
@@ -339,13 +349,15 @@ namespace CourseApp.Controllers
                 catch (Exception ex)
                 {
 
-                    ConsoleColor.Cyan.WriteConsole(ex.Message);
+                    ConsoleColor.Red.WriteConsole(ex.Message);
+                    goto EnterId;
                 }
 
             }
             else
             {
                 ConsoleColor.Red.WriteConsole("Teacher was not found. Try again:");
+                goto TeacherSurname;
 
             }
 

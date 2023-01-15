@@ -49,10 +49,7 @@ namespace RepositoryLayer.Repositories
                     groups.Capacity = entity.Capacity;
                 }
 
-                if (!string.IsNullOrEmpty(entity.Ceratdate.ToString()))
-                {
-                    groups.Ceratdate = entity.Ceratdate;
-                }
+               
                 return true;
             }
 

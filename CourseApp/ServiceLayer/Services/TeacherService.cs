@@ -22,6 +22,8 @@ namespace ServiceLayer.Services
         }
         public Teacher Create(Teacher teacher)
         {
+            if (teacher is null) throw new ArgumentNullException();
+
             teacher.Id = _count;
             _repo.Create(teacher);
             _count++;
@@ -52,6 +54,7 @@ namespace ServiceLayer.Services
 
 
         public List<Teacher> Search(string searchText)
+
         {
             List<Teacher> teachers = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()) || m.Surname.ToLower().Contains(searchText));
             if (teachers.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
