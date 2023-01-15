@@ -86,7 +86,7 @@ namespace ServiceLayer.Services
             if (groups.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
 
             return groups;
-        }
+        } 
 
         public int GetGroupCount()
         {
@@ -95,10 +95,19 @@ namespace ServiceLayer.Services
 
         public Group Update(int? id, Group group)
         {
-            throw new NotImplementedException();
+            var groups = _repo.Get(m => m.Id == id);
+            if (groups != null)
+            {
+                group.Id = groups.Id;
+                _repo.Update(group);
+                return groups;
+            }
+
+            return null;
+            
         }
     }
 
-   
-    
+
+
 }

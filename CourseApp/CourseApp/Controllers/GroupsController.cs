@@ -341,6 +341,56 @@ namespace CourseApp.Controllers
         }
 
 
+        public void GetGroupUptade()
+        {
+            ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id:");
+        ById: string GetByTeacherId = Console.ReadLine();
+
+            int id;
+            bool isIdTrue=int.TryParse(GetByTeacherId, out id);
+            if (isIdTrue)
+            {
+              ConsoleColor.DarkCyan.WriteConsole("Please Add new Group Name:");
+                GroupName: string groupNewName = Console.ReadLine();
+                if (groupNewName == string.Empty)
+                {
+                    ConsoleColor.Red.WriteConsole("Please add dont empty Group name:");
+                    goto GroupName;
+                }
+                
+                ConsoleColor.DarkCyan.WriteConsole("Please Add new Group Capacity:");
+            GroupCapacity: string groupNewCapacity = Console.ReadLine();
+
+                int capacity;
+                bool isCapacityTrue=int.TryParse (groupNewCapacity, out capacity);
+                if (groupNewCapacity == string.Empty)
+                {
+                    ConsoleColor.Red.WriteConsole("Please add dont empty Group name:");
+                    goto GroupCapacity;
+                }
+
+                Group group = new Group()
+                {
+                    Name = groupNewName,
+                    Capacity = capacity,
+                };
+
+                Group newGroup= _groupServices.Update(id, group);
+                if (newGroup!=null)
+                {
+                    ConsoleColor.Green.WriteConsole(
+                       $"Id: {newGroup.Id}, Name: {newGroup.Name}, Capacity: {newGroup.Capacity}," +
+                       $" Teacher Name : {newGroup.Teacher.Name} Create date: {newGroup.Ceratdate.ToString("dd,MM,yyyy")} ");
+                }
+                else
+                {
+                    ConsoleColor.Red.WriteConsole("Group was not found.Try again:");
+
+                }
+            }
+        }
+
+
 
     }
 

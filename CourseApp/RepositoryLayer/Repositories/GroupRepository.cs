@@ -36,7 +36,28 @@ namespace RepositoryLayer.Repositories
 
         public bool Update(Group entity)
         {
-            throw new NotImplementedException();
+            var groups= Get(m=>m.Id==entity.Id);
+            if (groups!=null)
+            {
+                if (!string.IsNullOrEmpty(entity.Name))
+                {
+                    groups.Name = entity.Name;
+                }
+
+                if (!string.IsNullOrEmpty(entity.Capacity.ToString()))
+                {
+                    groups.Capacity = entity.Capacity;
+                }
+
+                if (!string.IsNullOrEmpty(entity.Ceratdate.ToString()))
+                {
+                    groups.Ceratdate = entity.Ceratdate;
+                }
+                return true;
+            }
+
+            return false;
+
         }
 
         
