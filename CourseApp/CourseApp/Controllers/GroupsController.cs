@@ -222,7 +222,9 @@ namespace CourseApp.Controllers
 
                 foreach (var item in result)
                 {
-                    ConsoleColor.Green.WriteConsole($"Id: {item.Id}, Name: {item.Name}, Capacity: {item.Capacity}, Teacher Name : {item.Teacher.Name} ");
+                    ConsoleColor.Green.WriteConsole(
+                        $"Id: {item.Id}, Name: {item.Name}, Capacity: {item.Capacity}," +
+                        $" Teacher Name : {item.Teacher.Name} Create date: {item.Ceratdate.ToString("dd,MM,yyyy")} ");
                 }
 
             }
@@ -236,6 +238,107 @@ namespace CourseApp.Controllers
 
         }
 
+        public void GetGroupByCapacity()
+        {
+            string pettern = "^(?!\\s+$)[a-zA-Z]+$";
+
+            ConsoleColor.DarkCyan.WriteConsole("Please add capacity number:");
+        ByCapacityGroup: string GetByCapacity = Console.ReadLine();
+
+            if (GetByCapacity == string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Please add dont empty Group Id:");
+                goto ByCapacityGroup;
+            }
+            else if (Regex.IsMatch(GetByCapacity, pettern))
+            {
+                ConsoleColor.Red.WriteConsole("Please add number ");
+                goto ByCapacityGroup;
+            }
+
+            int capacityNum;
+
+            bool isCapacityNumTrue=int.TryParse(GetByCapacity, out capacityNum);
+            if (isCapacityNumTrue)
+            {
+                try
+                {
+                    Group group = new Group()
+                    {
+                        Capacity= capacityNum,
+
+                    };
+                    var response = _groupServices.GetGroupByCapacity(capacityNum);
+                    ConsoleColor.Green.WriteConsole($"Id: {response.Id}, Name: {response.Name}, Capacity: {response.Capacity} Teacher Name: {response.Teacher.Name}");
+
+                }
+                catch (Exception ex )
+                {
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Group Capacity again:");
+
+                }
+
+            }
+
+        }
+
+        public void GetGroupByTeacherId()
+        {
+            string pettern = "^(?!\\s+$)[a-zA-Z]+$";
+
+
+            ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id:");
+        ById: string GetByTeacherId = Console.ReadLine();
+
+            if (GetByTeacherId == string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Please add don't empty Teacher Id:");
+                goto ById;
+            }
+            else if (Regex.IsMatch(GetByTeacherId, pettern))
+            {
+                ConsoleColor.Red.WriteConsole("Please add Number");
+                goto ById;
+            }
+
+            int teacherId;
+
+            bool IsCorrectTeacherId=int.TryParse(GetByTeacherId, out teacherId);
+            if (IsCorrectTeacherId)
+            {
+                try
+                {
+                    var result = _groupServices.GetGroupByTeacherId(teacherId);
+                    foreach (var item in result)
+                    {
+                        ConsoleColor.Green.WriteConsole(
+                       $"Id: {item.Id}, Name: {item.Name}, Capacity: {item.Capacity}," +
+                       $" Teacher Name : {item.Teacher.Name} Create date: {item.Ceratdate.ToString("dd,MM,yyyy")} ");
+                    }
+
+
+                }
+                catch (Exception ex )
+                {
+
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Retype the word you're looking for");
+                    goto ById;
+                }
+
+            }
+            else
+            {
+                
+
+            }
+        } //elsini duzelt ---- obsi methodlarda else lere bax!!!
+
+        public void GetGroupCount()
+        {
+            var result= _groupServices.GetGroupCount();
+            ConsoleColor.DarkCyan.WriteConsole($"All Group Count: {result}");
+
+        }
 
 
 

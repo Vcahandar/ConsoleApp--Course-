@@ -29,7 +29,7 @@ namespace RepositoryLayer.Repositories
             return AppDbContext<Group>.datas.Find(predicate);
         }
 
-        public List<Group> GetAll(Predicate<Group> predicate)
+        public List<Group> GetAll(Predicate<Group> predicate=null)
         {
             return predicate == null ? AppDbContext<Group>.datas : AppDbContext<Group>.datas.FindAll(predicate);
         }

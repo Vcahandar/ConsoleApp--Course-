@@ -19,9 +19,10 @@ namespace ServiceLayer.Helpers.Enum
         GetGroupById,
         SearchMethodForGroupByName,
         GetAllGroupsByTeacherName,
-        UpdateGroup,
         GetGroupsByCapacity,
         GetGroupByTeacherId,
-        GetAllGroupsCount
+        GetAllGroupsCount,
+        UpdateGroup,
+       
     }
 }

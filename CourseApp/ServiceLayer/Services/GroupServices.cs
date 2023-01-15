@@ -45,8 +45,13 @@ namespace ServiceLayer.Services
         }
       
         public Group GetGroupByCapacity(int? capacity)
+
         {
-            throw new NotImplementedException();
+            if (capacity is null) throw new ArgumentNullException();
+
+            Group dbGroups = _repo.Get(m => m.Capacity == capacity);
+
+            return dbGroups;
         }
 
         public Group GetGroupById(int? id)
@@ -65,10 +70,14 @@ namespace ServiceLayer.Services
             return groups;
         }
 
-
         public List<Group> GetGroupByTeacherId(int? teacherId)
         {
-            throw new NotImplementedException();
+            if (teacherId is null) throw new ArgumentNullException();
+            List<Group> groups = _repo.GetAll(m=>m.Teacher.Id== teacherId);
+            if (teacherId == null) throw new NullReferenceException("Data not found");
+
+
+            return groups;
         }
 
         public List<Group> GetGroupByTeacherName(string teacherName)
@@ -81,7 +90,7 @@ namespace ServiceLayer.Services
 
         public int GetGroupCount()
         {
-            throw new NotImplementedException();
+            return _repo.GetAll().Count;
         }
 
         public Group Update(int? id, Group group)
