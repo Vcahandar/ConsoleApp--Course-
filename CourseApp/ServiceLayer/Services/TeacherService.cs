@@ -63,32 +63,13 @@ namespace ServiceLayer.Services
            
         }
 
-        public Teacher Update(int? id, Teacher teacher)
+        public Teacher Update(int? id,Teacher teacher)
         {
-            if(id==null) throw new ArgumentNullException();
-            if(teacher ==null) throw new ArgumentNullException();
-            var result = GetById(id);
-
-            if (result != null)
-            {
-                teacher.Id = result.Id;
-                if (teacher.Name == string.Empty) 
-                    teacher.Name = result.Name;
-                    result.Name=teacher.Name;
-                if (teacher.Surname == string.Empty)
-                    teacher.Surname = result.Surname;
-                    result.Surname=teacher.Surname;
-                if (teacher.Address== string.Empty)
-                    teacher.Address = result.Address;
-                    result.Address=teacher.Address;
-   
-                if (teacher.Age == null) 
-                    teacher.Age = result.Age;
-                     result.Age= teacher.Age;
-
-                _repo.Update(result);
-               
-            }
+            if (id == null) throw new ArgumentNullException("Data not found");
+            if (teacher == null) throw new ArgumentNullException();
+            teacher.Id=(int)id;
+            _repo.Update(teacher);
+            
             return teacher;
         }
     }

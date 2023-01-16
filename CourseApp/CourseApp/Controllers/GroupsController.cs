@@ -25,12 +25,12 @@ namespace CourseApp.Controllers
 
         public void Create()
         {
-            string pettern = "^(?!\\s+$)[a-zA-Z]+$";
+            string pattern = "^(?!\\s+$)[a-zA-Z]+$";
 
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id:");
-        TeacherId: string teacherId1 = Console.ReadLine();
+        TeacherId: string groupTeacherId1 = Console.ReadLine();
             int teacherId;
-            bool isTrueTeacherId = int.TryParse(teacherId1, out teacherId);
+            bool isTrueTeacherId = int.TryParse(groupTeacherId1, out teacherId);
             
             
                 if (!isTrueTeacherId)
@@ -38,7 +38,7 @@ namespace CourseApp.Controllers
                     ConsoleColor.Red.WriteConsole("You don't have a group");
                     goto TeacherId;
                 }
-                else if (Regex.IsMatch(teacherId1, pettern))
+                else if (Regex.IsMatch(groupTeacherId1, pattern))
                 {
                     ConsoleColor.Red.WriteConsole("Please Add Teacher Id");
                     goto TeacherId;
@@ -132,12 +132,20 @@ namespace CourseApp.Controllers
 
         public void GetByIdGroup()
         {
+
+            string pattern = "^(?!\\s+$)[a-zA-Z]+$";
+
             ConsoleColor.DarkCyan.WriteConsole("Please add Group Id:");
         ByIdGroup: string GetById = Console.ReadLine();
 
             if (GetById == string.Empty)
             {
                 ConsoleColor.Red.WriteConsole("Please add dont empty Group Id:");
+                goto ByIdGroup;
+            }
+            else if (Regex.IsMatch(GetById, pattern))
+            {
+                ConsoleColor.Red.WriteConsole("Please Enter the correct Group Id");
                 goto ByIdGroup;
             }
 
@@ -282,7 +290,7 @@ namespace CourseApp.Controllers
                 catch (Exception ex )
                 {
                     ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Group Capacity again:");
-
+                    goto ByCapacityGroup;
                 }
 
             }
@@ -333,11 +341,7 @@ namespace CourseApp.Controllers
                 }
 
             }
-            else
-            {
-                
-
-            }
+            
         } //elsini duzelt ---- obsi methodlarda else lere bax!!!
 
         public void GetGroupCount()
@@ -346,7 +350,6 @@ namespace CourseApp.Controllers
             ConsoleColor.DarkCyan.WriteConsole($"All Group Count: {result}");
 
         }
-
 
         public void GetGroupUptade()
         {
@@ -395,19 +398,6 @@ namespace CourseApp.Controllers
                 }
             }
         }
-
-        public bool GetContains(string text)
-        {
-            if (Regex.IsMatch(text,@"[^A-Za-z"))
-            {
-                return true;
-            }
-            return false;
-        }
-
-
-
-
     }
 
 

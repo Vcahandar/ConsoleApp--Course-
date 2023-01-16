@@ -34,7 +34,7 @@ namespace RepositoryLayer.Repositories
             return predicate == null ? AppDbContext<Group>.datas : AppDbContext<Group>.datas.FindAll(predicate);
         }
 
-        public bool Update(Group entity)
+        public void Update(Group entity)
         {
             var groups= Get(m=>m.Id==entity.Id);
             if (groups!=null)
@@ -50,9 +50,13 @@ namespace RepositoryLayer.Repositories
                 }
 
                
-                return true;
+                
             }
-            return false;
+            else
+            {
+                throw new ArgumentException();
+            }
+            groups.Teacher=entity.Teacher;
 
         }
 

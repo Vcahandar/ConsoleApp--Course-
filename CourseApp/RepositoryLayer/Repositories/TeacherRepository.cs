@@ -37,19 +37,51 @@ namespace RepositoryLayer.Repositories
             return predicate==null ? AppDbContext<Teacher>.datas:AppDbContext<Teacher>.datas.FindAll(predicate);
         }
 
-        public bool Update(Teacher entity)
+        public void Update(Teacher entity)
         {
             if (entity == null) throw new ArgumentNullException();
-            var result = Get(teacher => teacher.Id == entity.Id);
-            if (result != null)
+            var dbTeacher = Get(m => m.Id == entity.Id);
+            if (dbTeacher != null)
             {
+                if (entity.Age == 0)
+                {
+                    entity.Age = dbTeacher.Age;
+                }
+                else
+                {
+                    dbTeacher.Age = entity.Age;
+                }
+                if (String.IsNullOrEmpty(entity.Name))
+                {
+                    entity.Name = dbTeacher.Name;
+                }
+                else
+                {
+                     dbTeacher.Name = entity.Name;
+                }
+                if (String.IsNullOrEmpty(entity.Surname))
+                {
+                    entity.Surname = dbTeacher.Surname;
+                }
+                else
+                {
+                    dbTeacher.Surname= entity.Surname;
+                }
+                if (String.IsNullOrEmpty(entity.Address))
+                {
+                    entity.Address = entity.Address;
+                }
+                else
+                {
+                    dbTeacher.Address = entity.Address;
+                }
 
-                result.Name = entity.Name;
-                result.Surname = entity.Surname;
-                result.Address = entity.Address;
-                result.Age = entity.Age;
             }
-            return true;
+            else
+            {
+                throw new ArgumentNullException();
+            }
+            
         }
     }
 }

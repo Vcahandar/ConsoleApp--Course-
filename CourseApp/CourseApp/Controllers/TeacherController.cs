@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using ServiceLayer.Exceptions;
 using ServiceLayer.Helpers;
 using ServiceLayer.Services;
 using ServiceLayer.Services.Interfaces;
@@ -26,7 +27,7 @@ namespace CourseApp.Controllers
 
 
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher name:");
-        TeacherName: string teacherName = Console.ReadLine();
+        TeacherName: string teacherName = Console.ReadLine().Trim();
 
             if (teacherName == string.Empty)
             {
@@ -42,7 +43,7 @@ namespace CourseApp.Controllers
 
 
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher surname:");
-        TeacherSurname: string teacherSurname = Console.ReadLine();
+        TeacherSurname: string teacherSurname = Console.ReadLine().Trim();
 
             if (teacherSurname == string.Empty)
             {
@@ -58,7 +59,7 @@ namespace CourseApp.Controllers
 
 
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher address:");
-        TeacherAddress: string teacherAddress = Console.ReadLine();
+        TeacherAddress: string teacherAddress = Console.ReadLine().Trim();
 
             if (teacherAddress == string.Empty)
             {
@@ -68,7 +69,7 @@ namespace CourseApp.Controllers
 
 
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher age:");
-        TeacherAge: string teacherAgeStr = Console.ReadLine();
+        TeacherAge: string teacherAgeStr = Console.ReadLine().Trim();
 
             if (teacherAgeStr == string.Empty)
             {
@@ -243,143 +244,236 @@ namespace CourseApp.Controllers
 
         }
 
+
         public void Update()
         {
-
-            //string pettern1 = "/\\s+/g";
-            string pettern = "^(?!\\s+$)[a-zA-Z ]+$"; 
-            
-            ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id:");
-            EnterId: string teacherId = Console.ReadLine();
-            int id;
-            bool isIdTrue = int.TryParse(teacherId, out id);
-            if (Regex.IsMatch(teacherId,pettern))
+            ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id update:");
+        ById: string getById = Console.ReadLine();
+            int byIdNum;
+            bool isCorrectId=int.TryParse(getById, out byIdNum);
+            if (!isCorrectId)
             {
-                ConsoleColor.Red.WriteConsole(" Teacher Error Id:");
-                goto EnterId;
-            }
-
-            else if (teacherId == string.Empty)
-            {
-                ConsoleColor.Red.WriteConsole("Please add don't empty Teacher Id:");
-                goto EnterId;
-
-            }
-
-
-            ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Name:");
-        TeacherName: string newName = Console.ReadLine();
-            
-            //if (newName == string.Empty)
-            //{
-            //    ConsoleColor.Red.WriteConsole("Please add dont empty Teacher name:");
-            //    goto TeacherName;
-            //}
-            /*else */if (Regex.IsMatch(newName, pettern))
-            {
-                ConsoleColor.Red.WriteConsole("Please add letter ");
-                goto TeacherName;
-
-            }
-            
-
-            ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Surname:");
-        TeacherSurname: string newSurname = Console.ReadLine();
-
-            if (newSurname == string.Empty)
-            {
-                ConsoleColor.Red.WriteConsole("Please add dont empty Teacher name:");
-                goto TeacherSurname;
-            }
-            
-            else if (!Regex.IsMatch(newSurname, pettern))
-            {
-                ConsoleColor.Red.WriteConsole("Please add letter ");
-                goto TeacherSurname;
-            }
-
-
-            ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Address:");
-        TeacherAddress: string newAddress = Console.ReadLine();
-
-            if (newAddress == string.Empty)
-            {
-                ConsoleColor.Red.WriteConsole("Please add dont empty Teacher Address:");
-                goto TeacherSurname;
-            }
-            
-            else if (!Regex.IsMatch(newAddress, pettern))
-            {
-                ConsoleColor.Red.WriteConsole("Please add letter ");
-                goto TeacherAddress;
-            }
-
-
-            ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Age:");
-            TeacherAge: string newAge = Console.ReadLine();
-            if (newAge == string.Empty)
-            {
-                ConsoleColor.Red.WriteConsole("Please add dont empty Teacher Age:");
-                goto TeacherAge;
-            }
-            else if (Regex.IsMatch(newAge, pettern))
-            {
-                ConsoleColor.Red.WriteConsole("Please add letter ");
-                goto TeacherAge;
-            }
-            int age;
-            bool isAgeTrue = int.TryParse(newAge, out age);
-
-            if (isIdTrue)
-            {
-                try
-                {
-                    Teacher teacher = new Teacher
-                    {
-                        Name = newName,
-                        Surname = newSurname,
-                        Address = newAddress,
-                        Age = age
-
-                    };
-
-                    Teacher newTeacher = new();
-                   newTeacher = _teacherService.Update(id, teacher);
-                    ConsoleColor.Green.WriteConsole("Succesfully updated");
-
-                   
-                   
-                }
-                catch (Exception ex)
-                {
-
-                    ConsoleColor.Red.WriteConsole(ex.Message);
-                    goto EnterId;
-                }
+                ConsoleColor.Red.WriteConsole("Enter Correct Format Id");
+                goto ById;
 
             }
             else
             {
-                ConsoleColor.Red.WriteConsole("Teacher was not found. Try again:");
-                goto TeacherSurname;
+                try
+                {
+                    var thereTheacher = _teacherService.GetById(byIdNum);
+                    if (thereTheacher == null) throw new NotFoundException("Data not found");
+                }
+                catch (Exception ex)
+                {
+                    ConsoleColor.Red.WriteConsole(ex.Message);
+                    goto ById;
+                }
+                
+
+                ConsoleColor.DarkCyan.WriteConsole("Add a new Teacher Name:");
+            TeacherName: string newName = Console.ReadLine();
+                if (GetRegex(newName))
+                {
+                    goto TeacherName;
+                }
+
+                ConsoleColor.DarkCyan.WriteConsole("Add a new Teacher Surname:");
+            TeacherSurname: string newSurname = Console.ReadLine();
+                if(GetRegex(newSurname))
+                {
+                    goto TeacherSurname;
+                }
+
+                ConsoleColor.DarkCyan.WriteConsole("Add a new Teacher Address:");
+            AddressName: string newAddressName = Console.ReadLine();
+                if(GetRegex(newAddressName))
+                {
+                    goto AddressName;
+                }
+
+                ConsoleColor.DarkCyan.WriteConsole("Add a new Teacher Age:");
+            TeacherAge: string ageTeacherStr = Console.ReadLine();
+
+                int ageTeacher;
+                int checkAge = 0;
+                if(String.IsNullOrEmpty(ageTeacherStr))
+                {
+                    ageTeacher = checkAge;
+                }
+                else
+                {
+                    bool isCorrectAge = int.TryParse(ageTeacherStr, out ageTeacher);
+                    if (!isCorrectAge)
+                    {
+                        ConsoleColor.Red.WriteConsole("Please enter correct format age");
+                        goto TeacherAge;
+                    }
+                }
+
+                try
+                {
+                    Teacher teacher = new Teacher()
+                    {
+                        Name = newName,
+                        Surname = newSurname,
+                        Address= newAddressName,
+                        Age = ageTeacher,
+                    };
+                    Teacher editTeacher = new();
+                    editTeacher=_teacherService.Update(byIdNum, teacher);
+                    ConsoleColor.White.WriteConsole("Succesfully Updated");
+
+                }
+                catch (Exception ex)
+                {
+                    ConsoleColor.Red.WriteConsole(ex.Message);
+                    goto ById;
+
+                }
+
 
             }
+        }
 
 
 
-
-        } //regex se bax!!!
-
-        public bool GetContains(string text)
+        public bool GetRegex(string regex)
         {
-            if (Regex.IsMatch(text, @"[^A-Za-z"))
+            if (Regex.IsMatch(regex, @"[^A-Za-z]"))
             {
                 return true;
             }
             return false;
+
         }
+
+
+
+        #region update
+
+        //public void Update()
+        //{
+        //    string pettern1 = @"$[\\p{L}\\s]+$";
+        //    string pettern = "^[a-zA-Z]+$";
+
+        //    ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id:");
+        //EnterId: string teacherId = Console.ReadLine();
+        //    int id;
+        //    bool isIdTrue = int.TryParse(teacherId, out id);
+        //    if (Regex.IsMatch(teacherId, pettern))
+        //    {
+        //        ConsoleColor.Red.WriteConsole(" Teacher Error Id:");
+        //        goto EnterId;
+        //    }
+
+        //    else if (teacherId == string.Empty)
+        //    {
+        //        ConsoleColor.Red.WriteConsole("Please add don't empty Teacher Id:");
+        //        goto EnterId;
+
+        //    }
+
+
+        //    ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Name:");
+        //TeacherName: string newName = Console.ReadLine();
+
+        //    //if (newName == string.Empty)
+        //    //{
+        //    //    ConsoleColor.Red.WriteConsole("Please add dont empty Teacher name:");
+        //    //    goto TeacherName;
+        //    //}
+        //    /*else */
+        //    if (Regex.IsMatch(newName, pettern1))
+        //    {
+        //        ConsoleColor.Red.WriteConsole("Please add letter ");
+        //        goto TeacherName;
+
+        //    }
+        //    else if ((Regex.IsMatch(newName, pettern)))
+        //    {
+        //        ConsoleColor.Red.WriteConsole("Please add letter ");
+        //        goto TeacherName;  
+        //    }
+
+
+        //    ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Surname:");
+        //TeacherSurname: string newSurname = Console.ReadLine();
+
+        //    if (Regex.IsMatch(newSurname, pettern1))
+        //    {
+        //        ConsoleColor.Red.WriteConsole("Please add letter ");
+        //        goto TeacherSurname;
+        //    }
+
+
+        //    ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Address:");
+        //TeacherAddress: string newAddress = Console.ReadLine();
+
+        //    if (Regex.IsMatch(newAddress, pettern1))
+        //    {
+        //        ConsoleColor.Red.WriteConsole("Please add letter ");
+        //        goto TeacherAddress;
+        //    }
+
+
+        //    ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Age:");
+        //TeacherAge: string newAge = Console.ReadLine();
+        //    if (newAge == string.Empty)
+        //    {
+        //        ConsoleColor.Red.WriteConsole("Please add dont empty Teacher Age:");
+        //        goto TeacherAge;
+        //    }
+        //    else if (Regex.IsMatch(newAge, pettern))
+        //    {
+        //        ConsoleColor.Red.WriteConsole("Please add letter ");
+        //        goto TeacherAge;
+        //    }
+        //    int age;
+        //    bool isAgeTrue = int.TryParse(newAge, out age);
+
+        //    if (isIdTrue)
+        //    {
+        //        try
+        //        {
+        //            Teacher teacher = new Teacher
+        //            {
+        //                Name = newName,
+        //                Surname = newSurname,
+        //                Address = newAddress,
+        //                Age = age
+
+        //            };
+
+        //            Teacher newTeacher = new();
+        //            newTeacher = _teacherService.Update(id, teacher);
+        //            ConsoleColor.Green.WriteConsole("Succesfully updated");
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //            ConsoleColor.Red.WriteConsole(ex.Message);
+        //            goto EnterId;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ConsoleColor.Red.WriteConsole("Teacher was not found. Try again:");
+        //        goto TeacherSurname;
+
+        //    }
+        //}
+
+        #endregion
+
+
+
+
     }
 }
+      
+
 
 
 
