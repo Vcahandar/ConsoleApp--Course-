@@ -21,6 +21,7 @@ namespace CourseApp.Controllers
         }
         public void Create()
         {
+            //string pettern1 = "/[\\t\\n ]+/g\r\n";
             string pettern = "^(?!\\s+$)[a-zA-Z]+$";
 
 
@@ -186,7 +187,7 @@ namespace CourseApp.Controllers
             catch (Exception ex)
             {
 
-                ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add teacher name");
+                ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add teacher name and surname");
                 goto SearchText;
             }
 
@@ -202,7 +203,7 @@ namespace CourseApp.Controllers
 
             if (GetById == string.Empty)
             {
-                ConsoleColor.Red.WriteConsole("Please add dont empty Teacher age:");
+                ConsoleColor.Red.WriteConsole("Please add don't empty Teacher Id:");
                 goto ById;
             }
             else if (Regex.IsMatch(GetById, pettern))
@@ -242,13 +243,12 @@ namespace CourseApp.Controllers
 
         }
 
-
         public void Update()
         {
-           
-            string pettern = "^(?!\\s+$)[a-zA-Z]+$";
 
-
+            //string pettern1 = "/\\s+/g";
+            string pettern = "^(?!\\s+$)[a-zA-Z ]+$"; 
+            
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id:");
             EnterId: string teacherId = Console.ReadLine();
             int id;
@@ -258,7 +258,8 @@ namespace CourseApp.Controllers
                 ConsoleColor.Red.WriteConsole(" Teacher Error Id:");
                 goto EnterId;
             }
-            else if (teacherId==string.Empty)
+
+            else if (teacherId == string.Empty)
             {
                 ConsoleColor.Red.WriteConsole("Please add don't empty Teacher Id:");
                 goto EnterId;
@@ -269,17 +270,18 @@ namespace CourseApp.Controllers
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Name:");
         TeacherName: string newName = Console.ReadLine();
             
-            if (newName == string.Empty)
-            {
-                ConsoleColor.Red.WriteConsole("Please add dont empty Teacher name:");
-                goto TeacherName;
-            }
-            else if (!Regex.IsMatch(newName, pettern))
+            //if (newName == string.Empty)
+            //{
+            //    ConsoleColor.Red.WriteConsole("Please add dont empty Teacher name:");
+            //    goto TeacherName;
+            //}
+            /*else */if (Regex.IsMatch(newName, pettern))
             {
                 ConsoleColor.Red.WriteConsole("Please add letter ");
                 goto TeacherName;
 
             }
+            
 
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Surname:");
         TeacherSurname: string newSurname = Console.ReadLine();
@@ -289,6 +291,7 @@ namespace CourseApp.Controllers
                 ConsoleColor.Red.WriteConsole("Please add dont empty Teacher name:");
                 goto TeacherSurname;
             }
+            
             else if (!Regex.IsMatch(newSurname, pettern))
             {
                 ConsoleColor.Red.WriteConsole("Please add letter ");
@@ -304,6 +307,7 @@ namespace CourseApp.Controllers
                 ConsoleColor.Red.WriteConsole("Please add dont empty Teacher Address:");
                 goto TeacherSurname;
             }
+            
             else if (!Regex.IsMatch(newAddress, pettern))
             {
                 ConsoleColor.Red.WriteConsole("Please add letter ");
@@ -318,7 +322,7 @@ namespace CourseApp.Controllers
                 ConsoleColor.Red.WriteConsole("Please add dont empty Teacher Age:");
                 goto TeacherAge;
             }
-            else if (!Regex.IsMatch(newAddress, pettern))
+            else if (Regex.IsMatch(newAge, pettern))
             {
                 ConsoleColor.Red.WriteConsole("Please add letter ");
                 goto TeacherAge;
@@ -364,11 +368,16 @@ namespace CourseApp.Controllers
 
 
 
+        } //regex se bax!!!
+
+        public bool GetContains(string text)
+        {
+            if (Regex.IsMatch(text, @"[^A-Za-z"))
+            {
+                return true;
+            }
+            return false;
         }
-
-
-
-
     }
 }
 

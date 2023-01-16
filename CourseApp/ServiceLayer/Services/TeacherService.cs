@@ -34,7 +34,7 @@ namespace ServiceLayer.Services
         {
             if(id is null) throw new ArgumentNullException();
             Teacher dbTeacher = _repo.Get(m => m.Id == id);
-            if (dbTeacher  == null) throw new NullReferenceException("Data notfound");
+            if (dbTeacher  == null) throw new NullReferenceException("Data not found");
             _repo.Delete(dbTeacher);
         }
 

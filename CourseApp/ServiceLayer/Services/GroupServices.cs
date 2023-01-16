@@ -97,12 +97,12 @@ namespace ServiceLayer.Services
 
         public Group Update(int? id, Group group)
         {
-            var groups = _repo.Get(m => m.Id == id);
-            if (groups != null)
+            var groupsUpdate = _repo.Get(m => m.Id == id);
+            if (groupsUpdate != null)
             {
-                group.Id = groups.Id;
+                group.Id = groupsUpdate.Id;
                 _repo.Update(group);
-                return groups;
+                return groupsUpdate;
             }
 
             return null;

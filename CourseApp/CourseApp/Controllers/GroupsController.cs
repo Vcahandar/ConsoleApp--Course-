@@ -5,6 +5,7 @@ using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -84,14 +85,16 @@ namespace CourseApp.Controllers
                     };
 
                     var response = _groupServices.Create(group, teacherId);
-                    ConsoleColor.Green.WriteConsole($"Id: {response.Id}, Name: {response.Name},  Capacity:{response.Capacity}, Datetime:{response.Ceratdate} name:{response.Teacher.Name} ");
+                    ConsoleColor.Green.WriteConsole(
+                      $"Id: {response.Id}\nGroup Name: {response.Name}\nCapacity: {response.Capacity}" +
+                      $"\nTeacher Name : {response.Teacher.Name}\nCreate date: {response.Ceratdate.ToString("dd.MM.yyyy")} ");
 
                 }
                 catch (Exception ex)
                 {
 
-                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Group Name:");
-                    goto GroupName;
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please Add the Teacher ID again:");
+                    goto TeacherId;
 
                 }
             }
@@ -151,7 +154,9 @@ namespace CourseApp.Controllers
                     };
 
                     var result = _groupServices.GetGroupById(byIdNum);
-                    ConsoleColor.Green.WriteConsole($"Id: {result.Id}, Name: {result.Name}, Capaciti: {result.Capacity} Teacher Name: {result.Teacher.Name}");
+                    ConsoleColor.Green.WriteConsole(
+                      $"Id: {result.Id}\nGroup Name: {result.Name}\nCapacity: {result.Capacity}" +
+                      $"\nTeacher Name : {result.Teacher.Name}\nCreate date: {result.Ceratdate.ToString("dd.MM.yyyy")} ");
 
 
                 }
@@ -164,7 +169,6 @@ namespace CourseApp.Controllers
             }
 
         }
-
 
         public void GetGroupBySearchName()
         {
@@ -183,7 +187,9 @@ namespace CourseApp.Controllers
 
                 foreach (var item in result)
                 {
-                    ConsoleColor.Green.WriteConsole($"Id: {item.Id}, Name: {item.Name}, Capacity:{item.Capacity}, Teacher Name:{item.Teacher.Name}" );
+                    ConsoleColor.Green.WriteConsole(
+                                         $"Id: {item.Id}\nGroup Name: {item.Name}\nCapacity: {item.Capacity}" +
+                                         $"\nTeacher Name : {item.Teacher.Name}\nCreate date: {item.Ceratdate.ToString("dd.MM.yyyy")} ");
                 }
 
             }
@@ -268,7 +274,9 @@ namespace CourseApp.Controllers
 
                     };
                     var response = _groupServices.GetGroupByCapacity(capacityNum);
-                    ConsoleColor.Green.WriteConsole($"Id: {response.Id}, Name: {response.Name}, Capacity: {response.Capacity} Teacher Name: {response.Teacher.Name}");
+                    ConsoleColor.Green.WriteConsole(
+                     $"Id: {response.Id}\nGroup Name: {response.Name}\nCapacity: {response.Capacity}" +
+                     $"\nTeacher Name : {response.Teacher.Name}\nCreate date: {response.Ceratdate.ToString("dd.MM.yyyy")} ");
 
                 }
                 catch (Exception ex )
@@ -384,10 +392,19 @@ namespace CourseApp.Controllers
                 else
                 {
                     ConsoleColor.Red.WriteConsole("Group was not found.Try again:");
-
                 }
             }
         }
+
+        public bool GetContains(string text)
+        {
+            if (Regex.IsMatch(text,@"[^A-Za-z"))
+            {
+                return true;
+            }
+            return false;
+        }
+
 
 
 
