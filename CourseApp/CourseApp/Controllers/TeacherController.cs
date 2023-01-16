@@ -78,11 +78,11 @@ namespace CourseApp.Controllers
             }
 
 
-            int teachAge;
+         int teachAge;
 
             bool isTeacherAge = int.TryParse(teacherAgeStr, out teachAge);
 
-            if (isTeacherAge)
+            if (isTeacherAge &&teachAge>18&&teachAge<65)
             {
 
                 try
@@ -102,7 +102,7 @@ namespace CourseApp.Controllers
                 catch (Exception ex)
                 {
                     ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Teacher name again:");
-
+                    goto TeacherAge;
                 }
             }
             else
@@ -335,7 +335,6 @@ namespace CourseApp.Controllers
 
             }
         }
-
 
 
         public bool GetRegex(string regex)

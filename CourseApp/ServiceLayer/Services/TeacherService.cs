@@ -69,7 +69,6 @@ namespace ServiceLayer.Services
             if (teacher == null) throw new ArgumentNullException();
             teacher.Id=(int)id;
             _repo.Update(teacher);
-            
             return teacher;
         }
     }

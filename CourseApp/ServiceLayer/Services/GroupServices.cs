@@ -46,12 +46,14 @@ namespace ServiceLayer.Services
             _repo.Delete(dbGroup);
         }
       
-        public Group GetGroupByCapacity(int? capacity)
+        
+        public List<Group> GetGroupByCapacity(int? capacity)
 
         {
             if (capacity is null) throw new ArgumentNullException();
-
-            Group dbGroups = _repo.Get(m => m.Capacity == capacity);
+            List<Group> dbGroups = _repo.GetAll(m=>m.Capacity==capacity);
+            if (dbGroups.Count == 0) throw new ArgumentNullException();
+            
 
             return dbGroups;
         }
@@ -66,7 +68,8 @@ namespace ServiceLayer.Services
 
         public List<Group> GetGroupBySearchName(string searchText)
         {
-            List<Group> groups = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()));
+            if(searchText is null) throw new ArgumentNullException();
+            List<Group> groups = _repo.GetAll(m => m.Teacher.Name.ToLower().Contains(searchText.ToLower()));
             if (groups.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
 
             return groups;
@@ -76,7 +79,7 @@ namespace ServiceLayer.Services
         {
             if (teacherId is null) throw new ArgumentNullException();
             List<Group> groups = _repo.GetAll(m=>m.Teacher.Id== teacherId);
-            if (teacherId == null) throw new NullReferenceException("Data not found");
+            if (teacherId == null) throw new ArgumentNullException("Data not found");
 
 
             return groups;
@@ -84,7 +87,8 @@ namespace ServiceLayer.Services
 
         public List<Group> GetGroupByTeacherName(string teacherName)
         {
-            List<Group> groups = _repo.GetAll(m => m.Teacher.Name.ToLower().Contains(teacherName.ToLower()));
+            List<Group> groups = _repo.GetAll(m => m.Teacher.Name.Trim().ToLower() == teacherName.Trim().ToLower());
+           
             if (groups.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
 
             return groups;

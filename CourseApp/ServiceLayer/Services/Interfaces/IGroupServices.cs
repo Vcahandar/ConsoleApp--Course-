@@ -13,7 +13,7 @@ namespace ServiceLayer.Services.Interfaces
         Group Update(int? id,Group group);
         Group GetGroupById(int? id);
         void Delete(int? id);
-        Group GetGroupByCapacity(int? capacity);
+        List<Group> GetGroupByCapacity(int? capacity);
         List<Group> GetGroupByTeacherId(int? teacherId);
         List<Group> GetGroupByTeacherName(string teacherName);
         List<Group> GetGroupBySearchName(string searchText);
