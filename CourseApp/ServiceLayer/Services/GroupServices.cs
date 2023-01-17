@@ -69,7 +69,7 @@ namespace ServiceLayer.Services
         public List<Group> GetGroupBySearchName(string searchText)
         {
             if(searchText is null) throw new ArgumentNullException();
-            List<Group> groups = _repo.GetAll(m => m.Name.Trim().ToLower()==searchText.Trim().ToLower());
+            List<Group> groups = _repo.GetAll(m => m.Name.Trim().ToLower().Contains(searchText.Trim().ToLower()));
             if (groups.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
 
             return groups;
