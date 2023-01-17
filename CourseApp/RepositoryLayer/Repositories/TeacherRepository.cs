@@ -30,7 +30,6 @@ namespace RepositoryLayer.Repositories
             return AppDbContext<Teacher>.datas.Find(predicate);
         }
 
-       
 
         public List<Teacher> GetAll(Predicate<Teacher> predicate=null)
         {

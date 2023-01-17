@@ -50,7 +50,7 @@ namespace ServiceLayer.Services
         public List<Group> GetGroupByCapacity(int? capacity)
 
         {
-            if (capacity is null) throw new ArgumentNullException();
+            if (capacity == null) throw new ArgumentNullException();
             List<Group> dbGroups = _repo.GetAll(m=>m.Capacity==capacity);
             if (dbGroups.Count == 0) throw new ArgumentNullException();
             
@@ -69,7 +69,7 @@ namespace ServiceLayer.Services
         public List<Group> GetGroupBySearchName(string searchText)
         {
             if(searchText is null) throw new ArgumentNullException();
-            List<Group> groups = _repo.GetAll(m => m.Teacher.Name.ToLower().Contains(searchText.ToLower()));
+            List<Group> groups = _repo.GetAll(m => m.Name.Trim().ToLower()==searchText.Trim().ToLower());
             if (groups.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
 
             return groups;

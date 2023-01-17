@@ -86,6 +86,6 @@ static void GetOptions()
 {
     ConsoleColor.Cyan.WriteConsole("Please select one option: ");
     ConsoleColor.Cyan.WriteConsole("Teacher Options:\n1 - Create\n2 - Update Teacher\n3 - Delete\n4 - Get teacher by id\n5 - Get all teachers\n6 - Search for teacher name and surname\nGroup Options\n7 - Create Groups \n8 - Delete Group \n9 - Group By Id" +
-        "\n10 - Group Search Name Group\n11 - Groups Search Teacher Name\n12 - Groups Search Capacity\n13 - Groups Search By teacher Id\n14 - Groups Count\n15 - Groups Update");
+        "\n10 - Group Search Name Group:\n11 - Groups Search Teacher Name\n12 - Groups Search Capacity\n13 - Groups Search By teacher Id\n14 - Groups Count\n15 - Groups Update");
 }     
 

@@ -72,8 +72,9 @@ namespace CourseApp.Controllers
             int capacity;
 
             bool isTrue = int.TryParse(groupCapacity, out capacity);
+           
 
-            if (isTrue && isTrueTeacherId)
+            if (isTrue && isTrueTeacherId && capacity > 0 && capacity < 30)
             {
                 try
                 {
@@ -100,16 +101,28 @@ namespace CourseApp.Controllers
             }
             else
             {
-                ConsoleColor.Red.WriteConsole("Please Enter the correct Capacity");
+                ConsoleColor.Red.WriteConsole("Please enter the correct Capacity - 30 maximum capacity");
                 goto GroupCapacity;
             }
 
         }
 
         public void Delete()
+
         {
+            string regex = "^(?!\\s+$)[a-zA-Z]+$";
             ConsoleColor.DarkCyan.WriteConsole("Please add Group Id for delete:");
         GroupId: string groupId = Console.ReadLine();
+            if (groupId == string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Please add dont empty Group Id:");
+                goto GroupId;
+            }
+            else if (Regex.IsMatch(groupId, regex))
+            {
+                ConsoleColor.Red.WriteConsole("Please add Group Id");
+                goto GroupId;
+            }
 
             int id;
 
@@ -172,6 +185,7 @@ namespace CourseApp.Controllers
                 {
 
                     ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Group Id again:");
+                    goto ByIdGroup;
                 }
 
             }
@@ -265,67 +279,32 @@ namespace CourseApp.Controllers
 
             int groupNumCapacity;
             bool isCorrectGroupCapacity = int.TryParse(getByCapacityStr, out groupNumCapacity);
-            if (getByCapacityStr == string.Empty)
+            if (isCorrectGroupCapacity && groupNumCapacity > 0 && groupNumCapacity < 30)
             {
-                ConsoleColor.Red.WriteConsole("Please add dont empty Group Id:");
-                goto ByCapacityGroup;
-            }
+                try
+                {
+                    var group = _groupServices.GetGroupByCapacity(groupNumCapacity);
+                    foreach (var item in group)
+                    {
+                        ConsoleColor.Green.WriteConsole(
+                     $"Id: {item.Id}, Name: {item.Name}, Capacity: {item.Capacity}," +
+                     $" Teacher Name : {item.Teacher.Name} Create date: {item.Ceratdate.ToString("dd,MM,yyyy")}");
+                    }
 
-            if (!isCorrectGroupCapacity||groupNumCapacity<1)
+                }
+                catch (Exception ex)
+                {
+
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add difrent capacity");
+                    goto ByCapacityGroup;
+                }
+            }
+            else
             {
-                ConsoleColor.Red.WriteConsole("Please Enter Correct Capacity For Group:");
-                goto ByCapacityGroup;
-            }
-            else if (groupNumCapacity>=30)
-            {
-                ConsoleColor.Red.WriteConsole("Can Not Be Greater than 50:");
+                ConsoleColor.Red.WriteConsole("Please Correct Format capacity");
                 goto ByCapacityGroup;
 
             }
-
-
-
-
-
-
-
-            //if (GetByCapacity == string.Empty)
-            //{
-            //    ConsoleColor.Red.WriteConsole("Please add dont empty Group Id:");
-            //    goto ByCapacityGroup;
-            //}
-            //else if (Regex.IsMatch(GetByCapacity, pettern))
-            //{
-            //    ConsoleColor.Red.WriteConsole("Please add number ");
-            //    goto ByCapacityGroup;
-            //}
-
-            //int capacityNum;
-
-            //bool isCapacityNumTrue=int.TryParse(GetByCapacity, out capacityNum);
-            //if (isCapacityNumTrue&&capacityNum<20)
-            //{
-            //    try
-            //    {
-
-            //        var response = _groupServices.GetGroupByCapacity(capacityNum);
-            //        foreach (var item in response)
-            //        {
-
-            //            ConsoleColor.Green.WriteConsole(
-            //         $"Id: {item.Id}\nGroup Name: {item.Name}\nCapacity: {item.Capacity}" +
-            //         $"\nTeacher Name : {item.Teacher.Name}\nCreate date: {item.Ceratdate.ToString("dd.MM.yyyy")} ");
-
-            //        }
-            //    }
-            //    catch (Exception ex )
-            //    {
-            //        ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add Group Capacity again:");
-            //        goto ByCapacityGroup;
-            //    }
-
-            //}
-
         }
 
         public void GetGroupByTeacherId()
@@ -392,10 +371,10 @@ namespace CourseApp.Controllers
         public void GetGroupUptade()
         {
             ConsoleColor.DarkCyan.WriteConsole("Please add Teacher Id:");
-        ById: string GetByTeacherId = Console.ReadLine();
+        ById: string getByTeacherId = Console.ReadLine();
 
             int id;
-            bool isIdTrue=int.TryParse(GetByTeacherId, out id);
+            bool isIdTrue=int.TryParse(getByTeacherId, out id);
             if (isIdTrue)
             {
               ConsoleColor.DarkCyan.WriteConsole("Please Add new Group Name:");
@@ -411,29 +390,39 @@ namespace CourseApp.Controllers
 
                 int capacity;
                 bool isCapacityTrue=int.TryParse (groupNewCapacity, out capacity);
-                if (groupNewCapacity == string.Empty)
+                try
                 {
-                    ConsoleColor.Red.WriteConsole("Please add dont empty Group name:");
+                    if (groupNewCapacity == string.Empty)
+                    {
+                        ConsoleColor.Red.WriteConsole("Please add dont empty Group name:");
+                        goto GroupCapacity;
+                    }
+
+                    Group group = new Group()
+                    {
+                        Name = groupNewName,
+                        Capacity = capacity,
+                    };
+
+                    Group newGroup = _groupServices.Update(id, group);
+                    if (newGroup != null)
+                    {
+                        ConsoleColor.Green.WriteConsole(
+                           $"Id: {newGroup.Id}, Name: {newGroup.Name}, Capacity: {newGroup.Capacity}," +
+                           $" Teacher Name : {newGroup.Teacher.Name} Create date: {newGroup.Ceratdate.ToString("dd,MM,yyyy")} ");
+                    }
+                    else
+                    {
+                        ConsoleColor.Red.WriteConsole("Group was not found.Try again:");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Retype the word you're looking for");
                     goto GroupCapacity;
                 }
-
-                Group group = new Group()
-                {
-                    Name = groupNewName,
-                    Capacity = capacity,
-                };
-
-                Group newGroup= _groupServices.Update(id, group);
-                if (newGroup!=null)
-                {
-                    ConsoleColor.Green.WriteConsole(
-                       $"Id: {newGroup.Id}, Name: {newGroup.Name}, Capacity: {newGroup.Capacity}," +
-                       $" Teacher Name : {newGroup.Teacher.Name} Create date: {newGroup.Ceratdate.ToString("dd,MM,yyyy")} ");
-                }
-                else
-                {
-                    ConsoleColor.Red.WriteConsole("Group was not found.Try again:");
-                }
+                
             }
         }
     }
